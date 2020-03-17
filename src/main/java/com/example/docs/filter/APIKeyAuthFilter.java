@@ -8,7 +8,6 @@ public class APIKeyAuthFilter extends AbstractPreAuthenticatedProcessingFilter {
 
     @Override
     protected Object getPreAuthenticatedPrincipal(HttpServletRequest request) {
-        System.out.println(request.getParameter("api_key"));
         return request.getParameter("api_key");
     }
 

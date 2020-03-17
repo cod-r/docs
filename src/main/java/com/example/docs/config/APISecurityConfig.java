@@ -1,7 +1,10 @@
 package com.example.docs.config;
 
 import com.example.docs.filter.APIKeyAuthFilter;
+import com.giffing.bucket4j.spring.boot.starter.servlet.ServletRequestFilter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -16,6 +19,9 @@ public class APISecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Value("${principal.hashed.key}")
     private String principalHashedKey;
+
+    @Autowired
+    private ApplicationContext context;
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
@@ -40,6 +46,7 @@ public class APISecurityConfig extends WebSecurityConfigurerAdapter {
                 .authenticated()
                 .and()
                 .addFilter(filter)
+                .addFilterAfter(context.getBean(ServletRequestFilter.class), APIKeyAuthFilter.class)
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
 

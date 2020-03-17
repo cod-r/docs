@@ -7,9 +7,6 @@ import org.springframework.stereotype.Service;
 public class SecurityService {
 
     public boolean isAuthorized() {
-        System.out.println("sssq");
-        System.out.println(SecurityContextHolder.getContext().getAuthentication() != null &&
-                SecurityContextHolder.getContext().getAuthentication().isAuthenticated());
         return SecurityContextHolder.getContext().getAuthentication() != null &&
                 SecurityContextHolder.getContext().getAuthentication().isAuthenticated();
     }

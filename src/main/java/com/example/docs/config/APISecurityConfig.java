@@ -14,7 +14,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
 @Configuration
-@EnableWebSecurity(debug = true)
+@EnableWebSecurity
 public class APISecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Value("${principal.hashed.key}")
